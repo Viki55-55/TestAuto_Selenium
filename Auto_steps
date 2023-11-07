@@ -10,14 +10,14 @@ import io.cucumber.java.en.When;
 public class LoginSteps {
     private WebDriver driver;
 
-    @Given("I am on the Mailchimp login page")
+    @Given("I am on the Mailchimp login page") // driver för att komma till Mailchip login sida
     public void i_am_on_the_mailchimp_login_page() {
-        System.setProperty("webdriver.chrome.driver", "C:\Users\ViktoriaOlsson\Downloads\chromedriver_win32");
+        System.setProperty("webdriver.chrome.driver", "C:\Users\V\Downloads\chromedriver_win32");
         driver = new ChromeDriver();
         driver.get("https://login.mailchimp.com/signup/");
     }
 
-    @When("I enter a valid email address and password")
+    @When("I enter a valid email address and password")//driver för att lägga till en ny password och email
     public void i_enter_a_valid_email_address_and_password() {
         WebElement email = driver.findElement(By.id("email"));
         WebElement password = driver.findElement(By.id("new_password"));
@@ -26,14 +26,14 @@ public class LoginSteps {
     }
 
     @When("I enter a username that is more than 100 characters long and a valid password")
-    public void i_enter_a_username_that_is_more_than_100_characters_long_and_a_valid_password() {
+    public void i_enter_a_username_that_is_more_than_100_characters_long_and_a_valid_password() {// driver för att testa longa passwords
         WebElement username = driver.findElement(By.id("username"));
         WebElement password = driver.findElement(By.id("new_password"));
         username.sendKeys("thisisaverylongusernamethatisover100characterslong");
         password.sendKeys("password123");
     }
 
-    @When("I enter an email address and password that already exists in the system")
+    @When("I enter an email address and password that already exists in the system")//driver för att ange mail som finns redan
     public void i_enter_an_email_address_and_password_that_already_exists_in_the_system() {
         WebElement email = driver.findElement(By.id("email"));
         WebElement password = driver.findElement(By.id("new_password"));
@@ -41,7 +41,7 @@ public class LoginSteps {
         password.sendKeys("password123");
     }
 
-    @When("I enter an email address that does not exist in the system and a valid password")
+    @When("I enter an email address that does not exist in the system and a valid password")//driver för att testa inte existerande password
     public void i_enter_an_email_address_that_does_not_exist_in_the_system_and_a_valid_password() {
         WebElement email = driver.findElement(By.id("email"));
         WebElement password = driver.findElement(By.id("new_password"));
@@ -49,13 +49,13 @@ public class LoginSteps {
         password.sendKeys("password123");
     }
 
-    @When("I click the login button")
+    @When("I click the login button")//driver för att klicka på log in knapp
     public void i_click_the_login_button() {
         WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
         loginButton.click();
     }
 
-    @Then("I should be redirected to the Mailchimp dashboard")
+    @Then("I should be redirected to the Mailchimp dashboard")//driver för att redigeras till dashboard sidan https://us1.admin.mailchimp.com/dashboard/
     public void i_should_be_redirected_to_the_mailchimp_dashboard() {
         String expectedUrl = "https://us1.admin.mailchimp.com/dashboard/";
         String actualUrl = driver.getCurrentUrl();
@@ -63,19 +63,21 @@ public class LoginSteps {
         driver.quit();
     }
 
-    @Then("I should see an error message that says {string}")
+    @Then("I should see an error message that says {string}")//driver att testa error message
     public void i_should_see_an_error_message_that_says(String errorMessage) {
         WebElement errorElement = driver.findElement(By.xpath("//div[@class='error--container']//p[contains(text(),'" + errorMessage + "')]"));
         assert errorElement.isDisplayed();
         driver.quit();
     }
     
-    private void waitForElement(WebElement element) {
+    private void waitForElement(WebElement element) {// metod for element to appear
       WebDriverWait wait = new WebDriverWait(driver, 30);
-      wait.until(ExpectedConditions.visibilityOf(element));
+      wait.until(ExpectedConditions.visibilityOf(element));  
    }
    
-   private void waitForClickable(WebElement element) {
+   private void waitForClickable(WebElement element) {metod for wait att elementet kan klickas på 
+
+
       WebDriverWait wait = new WebDriverWait(driver, 30);
       wait.until(ExpectedConditions.elementToBeClickable(element));
    }
