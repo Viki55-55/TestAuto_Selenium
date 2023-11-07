@@ -1,0 +1,20 @@
+package Auto_Selenium; 
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+@RunWith(Cucumber.class) //runner class med Cucumber
+@CucumberOptions( //lägger till Cucumber options
+    features = "src/test/resources/features",
+    glue = "com.example.steps",
+    plugin = {"pretty", "html:target/cucumber-reports"}, 
+    tags = "@smokeTest",
+    monochrome = true,
+    strict = true,
+    dryRun = false,
+    snippets = CucumberOptions.SnippetType.CAMELCASE,
+    browser = {"chrome", "firefox", "safari"}, // kan användas på flera browsers
+    scenarioOutline = true
+)
+public class TestRunner {
+}
